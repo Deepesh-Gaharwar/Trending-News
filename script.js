@@ -6,7 +6,7 @@ async function fetchNews(query) {
     const res = await fetch(`${CONFIG.API_URL}${query}&apiKey=${CONFIG.API_KEY}`);
     if (!res.ok) {
         console.error('Network response was not ok');
-        return; // Stop execution if response is not okay
+        return; 
     }
     try {
         const data = await res.json();
@@ -18,8 +18,7 @@ async function fetchNews(query) {
 
 function bindData(articles) {
     const cardsContainer = document.getElementById("cards-container");
-    // Use a DocumentFragment for efficient DOM manipulation
-    // lightweight container that allows you to build and manipulate DOM elements off-screen.
+    
     const fragment = document.createDocumentFragment();
 
     articles.forEach((article) => {
@@ -28,7 +27,7 @@ function bindData(articles) {
         fragment.appendChild(cardClone);
     });
 
-    // Clear previous content and append new cards at once
+    
     cardsContainer.innerHTML = "";
     cardsContainer.appendChild(fragment);
 }
@@ -44,7 +43,7 @@ function createCard(article) {
             <p class="news-source">${article.source.name} · ${formatDate(article.publishedAt)}</p>
         </div>
     `;
-    // Open article in a new tab when card is clicked
+   
     card.addEventListener("click", () => {
         window.open(article.url, "_blank");
     });
@@ -60,7 +59,7 @@ const navItems = document.querySelectorAll('.nav-item');
 
 navItems.forEach(navItem => {
     navItem.addEventListener("click", () => {
-        const query = navItem.textContent.trim(); // Get text content of nav item as query
+        const query = navItem.textContent.trim(); 
         fetchNews(query);
         toggleActiveNav(navItem);
     });
@@ -79,20 +78,20 @@ const searchText = document.getElementById("search-text");
 
 document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById("search-button");
-    const searchText = document.getElementById("search-text"); // Assuming you have an input element with this ID
+    const searchText = document.getElementById("search-text"); 
 
     const search = () => {
-        const query = searchText.value.trim(); // Trim whitespace
+        const query = searchText.value.trim(); 
         if (!query) return;
         fetchNews(query);
-        searchText.value = ""; // Clear search input
-        toggleActiveNav(null); // Clear active navigation
+        searchText.value = ""; 
+        toggleActiveNav(null); 
     };
 
     searchButton.addEventListener("click", search);
 });
 
-//reload page
+
 function reloadPage() {
     location.reload();
 }
