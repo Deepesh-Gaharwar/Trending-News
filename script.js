@@ -1,10 +1,9 @@
-const API_KEY = "b55483c4bdfb40daa1eac132f7d6abf0";
-const url = "https://newsapi.org/v2/everything?q=";
+import CONFIG from "./config";
 
 window.addEventListener("load", () => fetchNews("India"));
 
 async function fetchNews(query) {
-    const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
+    const res = await fetch(`${CONFIG.API_URL}${query}&apiKey=${CONFIG.API_KEY}`);
     if (!res.ok) {
         console.error('Network response was not ok');
         return; // Stop execution if response is not okay
@@ -20,6 +19,7 @@ async function fetchNews(query) {
 function bindData(articles) {
     const cardsContainer = document.getElementById("cards-container");
     // Use a DocumentFragment for efficient DOM manipulation
+    // lightweight container that allows you to build and manipulate DOM elements off-screen.
     const fragment = document.createDocumentFragment();
 
     articles.forEach((article) => {
